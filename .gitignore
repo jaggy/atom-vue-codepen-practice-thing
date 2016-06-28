@@ -1,0 +1,13 @@
+/vendor
+/node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
+.env
+.vagrant
+composer.lock
+
+/app/Gulp/bower_components
+/app/Gulp/node_modules
+/_socketserver/node_modules
+/_socketserver/tmp

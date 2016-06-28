@@ -1,0 +1,30 @@
+@import "main" ;
+
+body {
+  font-family: "Endless-Boss-Battle";
+}
+
+.login {
+  .content {
+    margin-top: 20px;
+  }
+
+  .logo {
+    margin: auto 20px;
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100px;
+    }
+
+    span {
+      line-height: 45px;
+      font-size: 30px;
+      display: block;
+      color: white;
+    }
+  }
+}
