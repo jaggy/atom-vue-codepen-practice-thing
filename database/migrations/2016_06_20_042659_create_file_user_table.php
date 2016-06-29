@@ -14,10 +14,12 @@ class CreateFileUserTable extends Migration
     {
         Schema::create('file_user', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
-            $table->integer('file_id')->unsigned();
-            $table->primary(array('user_id', 'file_id'));
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->integer('file_id')->unsigned();
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
+
+            $table->primary(array('user_id', 'file_id'));
         });
     }
 

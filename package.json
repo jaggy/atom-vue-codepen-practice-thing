@@ -1,12 +1,23 @@
 {
   "private": true,
-  "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+  "dependencies": {
+    "sweetalert": "^1.1.3"
   },
   "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "concurrently": "^2.1.0",
     "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "laravel-elixir-vueify": "^1.0.3",
+    "node-sass": "^3.8.0",
+    "vue-resource": "^0.9.1",
+    "wyldstyle": "^0.3.8"
+  },
+  "scripts": {
+    "dev": "concurrently 'npm run sass' 'npm run wyldstyle' 'npm run live' 'npm run gulp'",
+    "sass": "node-sass --output-style compressed --watch --recursive --output public/css --source-map true resources/assets/scss",
+    "wyldstyle": "ws resources/views resources/assets/js resources/assets/scss/base/_utilities.scss",
+    "live": "browser-sync start --proxy 'boilerplate.dev' --files resources --no-open --no-notify",
+    "gulp": "gulp watch"
   }
 }
