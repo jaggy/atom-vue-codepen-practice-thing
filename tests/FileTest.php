@@ -1,6 +1,7 @@
 <?php
 
 use App\File;
+use App\Events\FileCreated;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class FileTest extends TestCase
@@ -18,5 +19,15 @@ class FileTest extends TestCase
 
         $this->assertEquals('blade.php', $file->extension);
         $this->assertEquals('master', $file->name);
+    }
+
+    /** @test **/
+    public function it_triggers_a_file_created_event_on_creation()
+    {
+        $this->expectsEvents(FileCreated::class);
+
+        $project = factory(App\Project::class)->create();
+
+        $project->addFile('theme.scss');
     }
 }

@@ -6,18 +6,17 @@ export default {
 
     data () {
         return {
+            filename: null,
             modal: { open: false },
         };
     },
 
     methods: {
         create_file () {
-            // Access the api here.
-
             this.$http
-                .post('/api/projects/1/files')
-                .then(function (data) {
-                    console.error(data);
+                .post('/api/projects/1/files', { filename: this.filename })
+                .then(file => {
+                    this.filename = null;
                 });
 
             this.modal.open = false;
@@ -32,6 +31,6 @@ export default {
     <modal :submit="create_file" v-if="modal.open">
         <span slot="header">Create a new file</span>
 
-        sadfasdfkasjfsa
+        <input type="text" name="filename" v-model="filename">
     </modal>
 </template>

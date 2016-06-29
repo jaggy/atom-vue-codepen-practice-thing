@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\FileCreated;
+
 class File extends Model
 {
     /**
@@ -26,5 +28,14 @@ class File extends Model
             $file->name = array_shift($segments);
             $file->extension = implode('.', $segments);
         });
+
+        static::created(function ($file) {
+            event(new FileCreated($file));
+        });
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }
