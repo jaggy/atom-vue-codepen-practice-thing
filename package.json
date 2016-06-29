@@ -17,7 +17,7 @@
     "dev": "concurrently 'npm run sass' 'npm run wyldstyle' 'npm run live' 'npm run gulp'",
     "sass": "node-sass --output-style compressed --watch --recursive --output public/css --source-map true resources/assets/scss",
     "wyldstyle": "ws resources/views resources/assets/js resources/assets/scss/base/_utilities.scss",
-    "live": "browser-sync start --proxy 'boilerplate.dev' --files resources --no-open --no-notify",
+    "live": "browser-sync start --proxy 'codeclash.dev' --files resources --no-open --no-notify",
     "gulp": "gulp watch"
   }
 }

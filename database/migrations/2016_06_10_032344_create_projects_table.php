@@ -17,6 +17,9 @@ class CreateProjectsTable extends Migration
 
             $table->string('name');
 
+            // Add a foreign key for the games?
+            // Problems
+
             $table->timestamps();
         });
     }

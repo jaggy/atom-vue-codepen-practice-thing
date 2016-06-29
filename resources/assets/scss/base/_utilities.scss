@@ -1,10 +1,11 @@
-.u-closed { closed: ${5}; }
-.u-default { default: ${5}; }
-.u-hover-submenu { hover-submenu: ${5}; }
-.u-light { line-height: ${5}; }
-.u-list { list-style-type: ${0}; }
-.u-option { option: ${5}; }
-.u-toggler { toggler: ${5}; }
+.u-ai\:c { align-items: center; }
+.u-d\:fx { display: flex; }
+.u-h\:100p { height: 100%; }
+.u-jc\:c { justify-content: center; }
+.u-p\:a { position: absolute; }
+.u-p\:l { page-break-after: left; }
+.u-t\:0 { top: 0; }
+.u-w\:100p { width: 100%; }
 
 @media (min-width: breakpoint(mobile)) {
 
