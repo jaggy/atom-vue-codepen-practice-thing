@@ -14,7 +14,12 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+
             $table->string('name');
+
+            // Add a foreign key for the games?
+            // Problems
+
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTeamUserTable extends Migration
+class CreateUserProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateTeamUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_user', function (Blueprint $table) {
+        Schema::create('user_profiles', function ($table) {
+            $table->increments('id');
+
+            $table->string('name')->nullable();
+            $table->string('image')->nullable();
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->integer('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
-
-            $table->primary(array('user_id', 'team_id'));
         });
     }
 
@@ -31,6 +30,6 @@ class CreateTeamUserTable extends Migration
      */
     public function down()
     {
-        Schema::drop('team_user');
+        Schema::drop('user_profiles');
     }
 }
