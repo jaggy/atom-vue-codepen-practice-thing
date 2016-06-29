@@ -2,7 +2,7 @@
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en" class="no-js">
+<html lang="en" class="no-js [ u-h:100p ]">
 <!--<![endif]-->
 
     <head>
@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="/css/theme.css" media="screen" title="no title" charset="utf-8">
     </head>
 
-    <body>
+    <body class="[ u-p:r u-mih:100p ]">
         @yield('content')
 
         <script src="/js/app.js"></script>

@@ -8,7 +8,9 @@ export default {
 
     ready () {
         this.$http.get('/api/projects/1/files')
-            .then(({ data }) => this.files = data);
+            .then(({ data }) => {
+                this.files = typeof data == 'string' ? JSON.parse(data) : data;
+            });
 
         var channel = this.$pusher.subscribe('projects.1');
 
