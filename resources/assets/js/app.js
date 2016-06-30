@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import config from './config.js';
-import CodeMirror from 'codemirror';
 
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/php/php');
@@ -9,28 +8,19 @@ require('codemirror/addon/lint/lint');
 require('codemirror/addon/lint/css-lint');
 require('codemirror/addon/lint/javascript-lint');
 
-let VueCodeMirror = {
-    install (Vue, options) {
-        Vue.prototype.editor = {
-            install (element) {
-                let editor = CodeMirror(element, {
-                    lineNumbers: true,
-                    gutters: ["CodeMirror-lint-markers"],
-                    lint: true,
-                    theme: 'base16-dark'
-                });
-
-                Vue.prototype.$editor = editor;
-            }
-        };
-    }
-};
-
-Vue.use(VueCodeMirror);
 Vue.use(require('vue-resource'));
-Vue.use(require('vue-pusher'), {
+Vue.use(require('./lib/vue-codemirror.js'), {
+    lineNumbers: true,
+    gutters: ["CodeMirror-lint-markers"],
+    theme: 'base16-dark',
+    lint: true
+});
+Vue.use(require('./lib/vue-pusher.js'), {
     api_key: '6873a5e0c3b926f4500f',
-    cluster: 'ap1',
+    options: {
+        cluster:  'ap1',
+        encrypted: true,
+    }
 });
 
 

@@ -42,10 +42,10 @@ export default {
                     this.files = typeof data == 'string' ? JSON.parse(data) : data;
                 });
 
-            var channel = this.$pusher.subscribe(`projects.${project_id}`);
-
-            channel.bind('App\\Events\\FileCreated', ({ file }) => {
-                this.files.push(file);
+            this.pusher.subscribe(`projects.${project_id}`, channel => {
+                channel.bind('App\\Events\\FileCreated', ({ file }) => {
+                    this.files.push(file);
+                });
             });
         },
 
@@ -92,12 +92,12 @@ export default {
             this.$editor.doc.setValue(file.content);
             this.$editor.setOption('mode', file.language);
 
-            var channel = this.$pusher.subscribe(`files.${file.id}`);
+            this.pusher.subscribe(`files.${file.id}`, channel => {
+                channel.bind('App\\Events\\FileSaved', ({ file }) => {
+                    this.current_file = file;
 
-            channel.bind('App\\Events\\FileSaved', ({ file }) => {
-                this.current_file = file;
-
-                this.$editor.doc.setValue(file.content);
+                    this.$editor.doc.setValue(file.content);
+                });
             });
         },
 
@@ -109,6 +109,8 @@ export default {
          */
         file_close (file) {
             this.tabs = _.reject(this.tabs, { id: file.id });
+
+            this.pusher.unsubscribe(`files.${this.current_file.id}`);
 
             if (this.tabs.length == 0) {
                 this.clean_editor();

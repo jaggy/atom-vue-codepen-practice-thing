@@ -9,4 +9,4 @@ export default {
 <template lang="html">
     <section v-el:editor class="editor [ u-h:100p ]">
     </section>
-</template>
+</template>;
