@@ -23,6 +23,10 @@ class File extends Model
     public static function boot()
     {
         static::saving(function (self $file) {
+            if (! $file->isDirty('name')) {
+                return;
+            }
+
             $segments = explode('.', $file->name);
 
             $file->name = array_shift($segments);

@@ -17,6 +17,7 @@ class CreateFilesTable extends Migration
 
             $table->string('name');
             $table->string('extension');
+            $table->string('language');
             $table->text('content')->nullable();
 
             $table->integer('project_id')->unsigned();
