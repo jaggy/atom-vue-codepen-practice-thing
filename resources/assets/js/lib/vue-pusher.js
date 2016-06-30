@@ -19,7 +19,7 @@ function VuePusher (api_key, options) {
 VuePusher.prototype.subscribe = function (channel_name, callback) {
     var channel = this.pusher.subscribe(channel_name);
 
-    if (this.channels.includes(channel)) {
+    if (! this.channels.includes(channel)) {
         this.channels.push(channel_name);
     }
 
@@ -32,7 +32,7 @@ VuePusher.prototype.subscribe = function (channel_name, callback) {
  * @param  {String} channel
  */
 VuePusher.prototype.unsubscribe = function (channel) {
-    this.channels[channel].unsubscribe(channel);
+    this.pusher.unsubscribe(channel);
 };
 
 /**

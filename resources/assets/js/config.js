@@ -13,7 +13,12 @@ export default {
     },
 
     data: {
-        current_file: {},
+        current_file: {
+            id:        null,
+            name:      null,
+            extension: null,
+            content:   null,
+        },
         tabs:  [],
         files: [],
     },
@@ -87,17 +92,9 @@ export default {
                 this.tabs.push(file);
             }
 
-            this.$http.get(`/api/files/${file.id}`)
-                .then(({ data }) => {
-                    let file = typeof data == 'string' ? JSON.parse(data) : data;
-
-                    this.current_file = file;
-
-                    this.$editor.doc.setValue(file.content);
-                });
-
             this.$editor.setOption('mode', file.language);
 
+            this.pusher.unsubscribe(`files.${this.current_file.id}`);
             this.pusher.subscribe(`files.${file.id}`, channel => {
                 channel.bind('App\\Events\\FileSaved', ({ file }) => {
                     this.current_file = file;
@@ -105,6 +102,15 @@ export default {
                     this.$editor.doc.setValue(file.content);
                 });
             });
+
+            this.$http.get(`/api/files/${file.id}`)
+                .then(({ data }) => {
+                    let file = typeof data == 'string' ? JSON.parse(data) : data;
+
+                    this.current_file = file;
+
+                    this.$editor.doc.setValue(file.content || '');
+                });
         },
 
         /**
@@ -115,8 +121,6 @@ export default {
          */
         file_close (file) {
             this.tabs = _.reject(this.tabs, { id: file.id });
-
-            this.pusher.unsubscribe(`files.${this.current_file.id}`);
 
             if (this.tabs.length == 0) {
                 this.clean_editor();

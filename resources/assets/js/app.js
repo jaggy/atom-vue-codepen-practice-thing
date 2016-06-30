@@ -15,7 +15,7 @@ Vue.use(require('./lib/vue-codemirror.js'), {
     theme: 'base16-dark',
     lint: true
 });
-Vue.use(require('./lib/vue-pusher.js'), {
+Vue.use(require('vue-pusher'), {
     api_key: '6873a5e0c3b926f4500f',
     options: {
         cluster:  'ap1',
