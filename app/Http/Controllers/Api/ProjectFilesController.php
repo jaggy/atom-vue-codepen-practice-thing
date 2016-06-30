@@ -16,7 +16,10 @@ class ProjectFilesController extends Controller
      */
     public function index($id)
     {
-        return Project::find($id)->files;
+        return Project::find($id)
+                      ->files()
+                      ->select('id', 'name', 'extension', 'language')
+                      ->get();
     }
 
     /**

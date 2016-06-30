@@ -87,9 +87,15 @@ export default {
                 this.tabs.push(file);
             }
 
-            this.current_file = file;
+            this.$http.get(`/api/files/${file.id}`)
+                .then(({ data }) => {
+                    let file = typeof data == 'string' ? JSON.parse(data) : data;
 
-            this.$editor.doc.setValue(file.content);
+                    this.current_file = file;
+
+                    this.$editor.doc.setValue(file.content);
+                });
+
             this.$editor.setOption('mode', file.language);
 
             this.pusher.subscribe(`files.${file.id}`, channel => {

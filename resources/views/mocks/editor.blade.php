@@ -13,5 +13,4 @@
 </main>
 
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
 @endsection

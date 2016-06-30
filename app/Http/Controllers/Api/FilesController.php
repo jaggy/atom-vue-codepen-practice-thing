@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 class FilesController extends Controller
 {
     /**
+     * Fetch the file information
+     */
+    public function show($id)
+    {
+        return File::find($id);
+    }
+    
+    /**
      * Update the file information.
      *
      * @route  PATCH  /api/files/:id
