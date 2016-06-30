@@ -26,13 +26,13 @@ let VueCodeMirror = {
     }
 };
 
+Vue.use(VueCodeMirror);
 Vue.use(require('vue-resource'));
 Vue.use(require('vue-pusher'), {
     api_key: '6873a5e0c3b926f4500f',
     cluster: 'ap1',
 });
 
-Vue.use(VueCodeMirror);
 
 Vue.debug = true;
 Vue.config.delimiters = ['@{', '}']
