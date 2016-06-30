@@ -21,8 +21,7 @@ class Project extends Model
      */
     public function addFile(string $name)
     {
-        return $this->files()
-                    ->save($this->newFile($name));
+        return $this->files()->save($this->newFile($name));
     }
 
 /*

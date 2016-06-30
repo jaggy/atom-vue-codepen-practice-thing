@@ -1,0 +1,23 @@
+$breakpoints: (
+    mobile:  30rem,
+    tablet:  48rem,
+    desktop: 64rem,
+    retina:  75rem
+);
+
+$fonts: (
+    headline:   unquote("'Montserrat', sans-serif"),
+    functional: unquote("'Montserrat', sans-serif"),
+    body:       unquote("'Helvetica Neue', sans-serif"),
+    code:       unquote("Inconsolata, 'Fira Code', monospace")
+);
+
+$primary:  #8cd4f5;
+$complete: #48b0f7;
+$success:  #10cfbd;
+$danger:   #f55753;
+$warning:  #f8d053;
+$neutral:  white;
+
+$font-color:   #575757;
+$border-color: grey;

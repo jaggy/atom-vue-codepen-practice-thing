@@ -8,5 +8,16 @@
 }
 
 html, body {
-    font-size: 16px;
+    line-height: 1.5;
+    min-height:  100%;
+}
+
+.wrapper {
+    padding: 0 1rem;
+}
+
+@media (min-width: breakpoint(mobile)) {
+    .wrapper {
+        padding: 0 2rem;
+    }
 }
