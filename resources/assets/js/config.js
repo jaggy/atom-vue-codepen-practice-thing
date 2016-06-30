@@ -9,16 +9,7 @@ export default {
     },
 
     ready () {
-        this.$http.get('/api/projects/1/files')
-            .then(({ data }) => {
-                this.files = typeof data == 'string' ? JSON.parse(data) : data;
-            });
-
-        var channel = this.$pusher.subscribe('projects.1');
-
-        channel.bind('App\\Events\\FileCreated', ({ file }) => {
-            this.files.push(file);
-        });
+        this.fetch_project_files(1);
     },
 
     data: {
@@ -30,11 +21,26 @@ export default {
     methods: {
         clean_editor () {
             this.current_file = {
-                id: null,
-                name: null,
+                id:        null,
+                name:      null,
                 extension: null,
-                content: null,
+                content:   null,
             };
+
+            this.$ace.getSession().setValue('');
+        },
+
+        fetch_project_files (project_id) {
+            this.$http.get(`/api/projects/${project_id}/files`)
+                .then(({ data }) => {
+                    this.files = typeof data == 'string' ? JSON.parse(data) : data;
+                });
+
+            var channel = this.$pusher.subscribe(`projects.${project_id}`);
+
+            channel.bind('App\\Events\\FileCreated', ({ file }) => {
+                this.files.push(file);
+            });
         },
     },
 
@@ -44,7 +50,8 @@ export default {
                 this.tabs.push(file);
             }
 
-            this.current_file = file;
+            this.$ace.setValue(file.content);
+            this.$ace.getSession().setMode(`ace/mode/${file.language}`);
         },
 
         file_close (file) {
