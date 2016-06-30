@@ -6,7 +6,10 @@
         <tree-view class="" :files="files"></tree-view>
     </aside>
 
-    <editor class="[ u-h:100p u-w:100p ]"></editor>
+    <section class="workspace [ u-h:100p u-w:100p ]">
+        <tabs :files="tabs"></tabs>
+        <editor :file="current_file"></editor>
+    </section>
 </main>
 
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>

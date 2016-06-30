@@ -3,9 +3,21 @@ import CreateFileButton from './CreateFileButton.vue';
 
 export default {
     props: {
-        files: [],
+        files: {
+            type: Array,
+            default () {
+                return [];
+            },
+        },
     },
+
     components: { CreateFileButton },
+
+    methods: {
+        select (file) {
+            this.$dispatch('file_select', file);
+        },
+    },
 }
 </script>
 
@@ -17,7 +29,9 @@ export default {
 
         <section class="tree-view__body">
             <ul>
-                <li v-for="file in files">@{ file.name }.@{ file.extension }</li>
+                <li v-for="file in files">
+                    <a href="#" @click="select(file)">@{ file.name }.@{ file.extension }</a>
+                </li>
             </ul>
         </section>
     </aside>

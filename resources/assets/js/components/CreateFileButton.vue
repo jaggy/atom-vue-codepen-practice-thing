@@ -7,7 +7,7 @@ export default {
     data () {
         return {
             filename: null,
-            modal: { open: true },
+            modal: { open: false },
         };
     },
 
@@ -20,7 +20,7 @@ export default {
                 });
 
             this.modal.open = false;
-        }
+        },
     },
 }
 </script>

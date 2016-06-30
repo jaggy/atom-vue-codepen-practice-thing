@@ -1,9 +1,11 @@
+import _ from 'underscore';
 import TreeView from './components/TreeView.vue';
 import Editor from './components/Editor.vue';
+import Tabs from './components/Tabs.vue';
 
 export default {
     components: {
-        TreeView, Editor
+        TreeView, Editor, Tabs,
     },
 
     ready () {
@@ -19,8 +21,25 @@ export default {
         });
     },
 
-    data: { files: [] },
+    data: {
+        current_file: {},
+        tabs:  [],
+        files: [],
+    },
 
     events: {
+        file_select (file) {
+            if (! _.contains(this.tabs, file)) {
+                this.tabs.push(file);
+            }
+
+            this.current_file = file;
+        },
+
+        file_close (file) {
+            this.tabs = _.reject(this.tabs, { id: file.id });
+
+            this.$dispatch('file_select', _.first(this.tabs));
+        },
     },
 };
