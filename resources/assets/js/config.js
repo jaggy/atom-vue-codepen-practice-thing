@@ -27,6 +27,17 @@ export default {
         files: [],
     },
 
+    methods: {
+        clean_editor () {
+            this.current_file = {
+                id: null,
+                name: null,
+                extension: null,
+                content: null,
+            };
+        },
+    },
+
     events: {
         file_select (file) {
             if (! _.contains(this.tabs, file)) {
@@ -38,6 +49,12 @@ export default {
 
         file_close (file) {
             this.tabs = _.reject(this.tabs, { id: file.id });
+
+            if (this.tabs.length == 0) {
+                this.clean_editor();
+
+                return;
+            }
 
             this.$dispatch('file_select', _.first(this.tabs));
         },
