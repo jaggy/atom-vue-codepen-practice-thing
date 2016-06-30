@@ -1,22 +1,27 @@
-import ace from 'brace';
 import Vue from 'vue';
 import config from './config.js';
+import CodeMirror from 'codemirror';
 
-require('brace/mode/javascript');
-require('brace/mode/php');
-require('brace/mode/css');
-require('brace/theme/tomorrow_night');
+require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/php/php');
+require('codemirror/mode/css/css');
+require('codemirror/addon/lint/lint');
+require('codemirror/addon/lint/css-lint');
+require('codemirror/addon/lint/javascript-lint');
 
-let VueAceEditor = {
-    install () {
-        Vue.prototype.ace = {
-            install (selector) {
-                let editor = ace.edit(selector);
+let VueCodeMirror = {
+    install (Vue, options) {
+        Vue.prototype.editor = {
+            install (element) {
+                let editor = CodeMirror(element, {
+                    lineNumbers: true,
+                    gutters: ["CodeMirror-lint-markers"],
+                    lint: true,
+                    theme: 'base16-dark'
+                });
 
-                editor.setTheme('ace/theme/tomorrow_night');
-
-                Vue.prototype.$ace = editor;
-            },
+                Vue.prototype.$editor = editor;
+            }
         };
     }
 };
@@ -27,7 +32,7 @@ Vue.use(require('vue-pusher'), {
     cluster: 'ap1',
 });
 
-Vue.use(VueAceEditor);
+Vue.use(VueCodeMirror);
 
 Vue.debug = true;
 Vue.config.delimiters = ['@{', '}']

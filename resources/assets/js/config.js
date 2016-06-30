@@ -27,7 +27,7 @@ export default {
                 content:   null,
             };
 
-            this.$ace.getSession().setValue('');
+            this.$editor.doc.setValue('');
         },
 
         fetch_project_files (project_id) {
@@ -50,8 +50,8 @@ export default {
                 this.tabs.push(file);
             }
 
-            this.$ace.setValue(file.content);
-            this.$ace.getSession().setMode(`ace/mode/${file.language}`);
+            this.$editor.doc.setValue(file.content);
+            this.$editor.setOption('mode', file.language);
         },
 
         file_close (file) {
