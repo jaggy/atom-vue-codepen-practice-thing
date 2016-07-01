@@ -26,6 +26,9 @@ export default {
         },
         tabs:  [],
         files: [],
+        sidebar: {
+            closed: false,
+        }
     },
 
     methods: {
@@ -79,7 +82,11 @@ export default {
         check_commands (event) {
             const KEY_S     = event.keyCode ==  83;
             const KEY_W     = event.keyCode ==  87;
+            const KEY_E     = event.keyCode ==  69;
+            const KEY_N     = event.keyCode ==  78;
             const KEY_SUPER = (event.metaKey || event.ctrlKey);
+
+            console.error(event.keyCode);
 
             if (KEY_SUPER && KEY_S) {
                 event.preventDefault();
@@ -91,6 +98,17 @@ export default {
                 event.preventDefault();
 
                 this.$dispatch('file_close', this.current_file);
+            }
+
+            if (KEY_SUPER && KEY_E) {
+                event.preventDefault();
+
+                this.sidebar.closed = ! this.sidebar.closed;
+            }
+
+            if (KEY_SUPER && KEY_N) {
+                event.preventDefault();
+
             }
         },
     },
@@ -107,8 +125,6 @@ export default {
                 this.tabs.push(file);
             }
 
-            this.$editor.setOption('mode', file.language);
-
             this.pusher.unsubscribe(`files.${this.current_file.id}`);
             this.pusher.subscribe(`files.${file.id}`, channel => {
                 channel.bind('App\\Events\\FileSaved', ({ file }) => {
@@ -123,6 +139,7 @@ export default {
                     this.current_file = file;
 
                     this.$editor.doc.setValue(file.content || '');
+                    this.$editor.setOption('mode', file.language);
                 });
         },
 
