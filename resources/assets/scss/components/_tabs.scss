@@ -1,3 +1,8 @@
-.tab-bar__tab--active {
-    border-bottom: 2px solid $tab-bar-font-color;
+.tab__highlight {
+    width: 0;
+    transition: 0.2s width ease-in-out;
+}
+
+.tab__highlight--active {
+    width: 100%;
 }

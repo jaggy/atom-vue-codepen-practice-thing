@@ -1,5 +1,8 @@
-.sidebar { flex-basis: 17rem; }
-.workspace { flex-basis: calc(100% - 17rem); }
+.sidebar { flex-basis: 15rem; }
+.workspace {
+    flex-basis: calc(100% - 15rem);
+    overflow-x: scroll;
+}
 
 .sidebar--closed {
     > .sidebar { display: none; }

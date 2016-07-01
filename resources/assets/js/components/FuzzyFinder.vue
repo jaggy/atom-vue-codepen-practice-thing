@@ -1,7 +1,12 @@
 <script>
 import _ from 'underscore';
+import { focusAuto } from 'vue-focus';
 
 export default {
+    directives: {
+        focusAuto: focusAuto
+    },
+
     props: {
         files: {
             type: Array,
@@ -68,7 +73,8 @@ export default {
                    autofocus="autofocus"
                    @keydown.down="down"
                    @keydown.up="up"
-                   @keydown.enter="select(active)">
+                   @keydown.enter="select(active)"
+                   v-focus-auto>
         </div>
 
         <ul class="fuzzy-finder__files [ u-lis:n ]">

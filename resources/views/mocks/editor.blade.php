@@ -5,7 +5,7 @@
       :class="{ 'sidebar--closed': sidebar.closed }"
       class="[ u-h:100p u-w:100p u-d:fx u-fxd:r u-h:100p u-w:100p u-p:f ]">
 
-    <fuzzy-finder :visible="search.open" :files="active_project.files"></fuzzy-finder>
+    <fuzzy-finder :visible.sync="search.open" :files="active_project.files"></fuzzy-finder>
 
     <aside class="sidebar [ u-h:100p u-fz:$sidebar-font-size u-bgc:$tree-view-background ]">
         <header class="sidebar__header [ u-h:2.5r u-d:fx u-bgc:$sidebar-header-background u-pl:0.75r u-pr:0.75r ]">

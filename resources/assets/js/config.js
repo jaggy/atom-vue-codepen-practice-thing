@@ -88,6 +88,15 @@ export default {
         },
 
         /**
+         * Reset the whole application state.
+         *
+         * @return {void}
+         */
+        reset () {
+            this.search.open = false;
+        },
+
+        /**
          * Let's listen for the shortcuts here.
          *
          * @param  {Object} event
@@ -99,9 +108,8 @@ export default {
             const KEY_E     = event.keyCode ==  69;
             const KEY_N     = event.keyCode ==  78;
             const KEY_P     = event.keyCode ==  80;
+            const KEY_ESC   = event.keyCode == 27;
             const KEY_SUPER = (event.metaKey || event.ctrlKey);
-
-            console.error(event.keyCode);
 
             if (KEY_SUPER && KEY_S) {
                 event.preventDefault();
@@ -125,6 +133,12 @@ export default {
                 event.preventDefault();
 
                 this.search.open = ! this.search.open;
+            }
+
+            if (KEY_ESC) {
+                event.preventDefault();
+
+                this.reset();
             }
         },
     },
