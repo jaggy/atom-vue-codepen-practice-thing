@@ -28,8 +28,9 @@ $base16-dark-background:   #1d1f21;
 $base16-dark-primary:      $base16-dark-teal;
 $base16-dark-font-color:   #a4a6a5;
 
-$font-color:   $base16-dark-font-color;
-$border-color: grey;
+$theme-primary: $base16-dark-primary;
+$font-color:    $base16-dark-font-color;
+$border-color:  grey;
 
 $editor-background:                    $base16-dark-background;
 $tree-view-background:                 $editor-background;

@@ -2,10 +2,11 @@ import _ from 'underscore';
 import TreeView from './components/TreeView.vue';
 import Editor from './components/Editor.vue';
 import Tabs from './components/Tabs.vue';
+import FuzzyFinder from './components/FuzzyFinder.vue';
 
 export default {
     components: {
-        TreeView, Editor, Tabs,
+        TreeView, Editor, Tabs, FuzzyFinder,
     },
 
     ready () {
@@ -26,9 +27,8 @@ export default {
         },
         tabs:  [],
         files: [],
-        sidebar: {
-            closed: false,
-        }
+        sidebar: { closed: false },
+        search:  { open: false },
     },
 
     methods: {
@@ -50,9 +50,23 @@ export default {
          * @return {void}
          */
         fetch_project (project_id) {
+            const supported_extensions = ['php', 'blade.php', 'css', 'html', 'js'];
+
             this.$http.get(`/api/projects/${project_id}`)
                 .then(({ data }) => {
-                    this.active_project = typeof data == 'string' ? JSON.parse(data) : data;
+                    let project = typeof data == 'string' ? JSON.parse(data) : data;
+
+                    for (var i = 0; i < project.files.length; i++) {
+                        let file = project.files[i];
+
+                        file.icon = 'octicon-' + file.extension.replace('.', '-');
+
+                        if (! supported_extensions.includes(file.extension)) {
+                            file.icon = 'icon-insert_drive_file';
+                        }
+                    }
+
+                    this.active_project = project;
                 });
 
             this.pusher.subscribe(`projects.${project_id}`, channel => {
@@ -84,6 +98,7 @@ export default {
             const KEY_W     = event.keyCode ==  87;
             const KEY_E     = event.keyCode ==  69;
             const KEY_N     = event.keyCode ==  78;
+            const KEY_P     = event.keyCode ==  80;
             const KEY_SUPER = (event.metaKey || event.ctrlKey);
 
             console.error(event.keyCode);
@@ -106,9 +121,10 @@ export default {
                 this.sidebar.closed = ! this.sidebar.closed;
             }
 
-            if (KEY_SUPER && KEY_N) {
+            if (KEY_SUPER && KEY_P) {
                 event.preventDefault();
 
+                this.search.open = ! this.search.open;
             }
         },
     },

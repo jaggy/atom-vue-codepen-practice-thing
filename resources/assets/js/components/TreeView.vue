@@ -3,21 +3,6 @@ export default {
     props: {
         project: {
             type: Object,
-            coerce (project) {
-                const supported_extensions = ['php', 'blade.php', 'css', 'html', 'js'];
-
-                for (var i = 0; i < project.files.length; i++) {
-                    let file = project.files[i];
-
-                    file.icon = 'octicon-' + file.extension.replace('.', '-');
-
-                    if (! supported_extensions.includes(file.extension)) {
-                        file.icon = 'icon-insert_drive_file';
-                    }
-                }
-
-                return project;
-            },
             default () {
                 return {
                     name:  null,
@@ -53,7 +38,7 @@ export default {
                    class="[ u-pl:1.5r u-pr:0.75r u-h:2r u-c:$sidebar-font-color u-td:n u-d:fx u-ai:c ]"
                    @click="select(file)">
                    <i class="file__icon [ u-mr:0.5r ]" :class="[ file.icon ]"></i>
-                   @{ file.name }.@{ file.extension }
+                   @{ file.name }
                </a>
             </li>
         </ul>

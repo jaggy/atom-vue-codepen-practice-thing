@@ -29,8 +29,7 @@ class File extends Model
 
             $segments = explode('.', $file->name);
 
-            $file->name = array_shift($segments);
-            $file->extension = implode('.', $segments);
+            $file->extension = implode('.', array_slice($segments, 1));
         });
 
         static::created(function ($file) {

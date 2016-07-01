@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="/css/theme.css" media="screen" title="no title" charset="utf-8">
     </head>
 
-    <body class="[ u-p:r u-mih:100p ]">
+    <body class="[ u-p:r u-mih:100p ]" @keydown="check_commands($event)">
         @yield('content')
 
         <script src="/js/app.js"></script>
