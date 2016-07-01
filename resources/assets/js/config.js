@@ -9,7 +9,7 @@ export default {
     },
 
     ready () {
-        this.fetch_project_files(1);
+        this.fetch_project(1);
     },
 
     data: {
@@ -18,6 +18,11 @@ export default {
             name:      null,
             extension: null,
             content:   null,
+        },
+        active_project: {
+            id:    null,
+            name:  null,
+            files: [],
         },
         tabs:  [],
         files: [],
@@ -41,10 +46,10 @@ export default {
          * @param  {Number} project_id
          * @return {void}
          */
-        fetch_project_files (project_id) {
-            this.$http.get(`/api/projects/${project_id}/files`)
+        fetch_project (project_id) {
+            this.$http.get(`/api/projects/${project_id}`)
                 .then(({ data }) => {
-                    this.files = typeof data == 'string' ? JSON.parse(data) : data;
+                    this.active_project = typeof data == 'string' ? JSON.parse(data) : data;
                 });
 
             this.pusher.subscribe(`projects.${project_id}`, channel => {
@@ -72,10 +77,20 @@ export default {
          * @return {void}
          */
         check_commands (event) {
-            if ((event.metaKey || event.ctrlKey) && event.keyCode == 83) {
+            const KEY_S     = event.keyCode ==  83;
+            const KEY_W     = event.keyCode ==  87;
+            const KEY_SUPER = (event.metaKey || event.ctrlKey);
+
+            if (KEY_SUPER && KEY_S) {
                 event.preventDefault();
 
                 this.save_file();
+            }
+
+            if (KEY_SUPER && KEY_W) {
+                event.preventDefault();
+
+                this.$dispatch('file_close', this.current_file);
             }
         },
     },
@@ -97,8 +112,6 @@ export default {
             this.pusher.unsubscribe(`files.${this.current_file.id}`);
             this.pusher.subscribe(`files.${file.id}`, channel => {
                 channel.bind('App\\Events\\FileSaved', ({ file }) => {
-                    this.current_file = file;
-
                     this.$editor.doc.setValue(file.content);
                 });
             });

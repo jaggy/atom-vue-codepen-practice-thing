@@ -1,5 +1,7 @@
-@import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';
-@import 'https://fonts.googleapis.com/css?family=Lato';
+// @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';
+// @import 'https://fonts.googleapis.com/css?family=Lato';
+
+@import 'https://fonts.googleapis.com/css?family=Roboto:400,300,700';
 
 @import 'helpers/functions';
 @import 'helpers/mixins';
@@ -13,9 +15,11 @@
 @import 'vendor/icomoon';
 @import 'vendor/sweetalert';
 @import 'vendor/codemirror';
+@import 'vendor/octicon';
 
 @import 'components/modal';
 @import 'components/editor';
 @import 'components/button';
+@import 'components/tabs';
 
 @import 'layout/content';
