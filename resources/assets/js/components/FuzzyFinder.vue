@@ -25,7 +25,7 @@ export default {
     data () {
         return {
             query:  null,
-            cursor: 0,
+            cursor: -1,
             active: { id: null },
         }
     },
