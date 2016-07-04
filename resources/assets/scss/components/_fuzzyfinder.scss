@@ -1,0 +1,10 @@
+.fuzzy-finder__input {
+    background:    none;
+    border-bottom: 2px solid $theme-primary;
+    color:         $font-color;
+}
+
+.fuzzy-finder__file--active {
+    background: $theme-primary;
+    color:      $base16-dark-white;
+}

@@ -1,0 +1,10 @@
+.sidebar { flex-basis: 15rem; }
+.workspace {
+    flex-basis: calc(100% - 15rem);
+    overflow-x: scroll;
+}
+
+.sidebar--closed {
+    > .sidebar { display: none; }
+    > .workspace { flex-basis: 100%; }
+}

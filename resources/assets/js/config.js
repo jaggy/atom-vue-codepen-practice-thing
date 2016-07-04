@@ -2,14 +2,15 @@ import _ from 'underscore';
 import TreeView from './components/TreeView.vue';
 import Editor from './components/Editor.vue';
 import Tabs from './components/Tabs.vue';
+import FuzzyFinder from './components/FuzzyFinder.vue';
 
 export default {
     components: {
-        TreeView, Editor, Tabs,
+        TreeView, Editor, Tabs, FuzzyFinder,
     },
 
     ready () {
-        this.fetch_project_files(1);
+        this.fetch_project(1);
     },
 
     data: {
@@ -19,8 +20,15 @@ export default {
             extension: null,
             content:   null,
         },
+        active_project: {
+            id:    null,
+            name:  null,
+            files: [],
+        },
         tabs:  [],
         files: [],
+        sidebar: { closed: false },
+        search:  { open: false },
     },
 
     methods: {
@@ -41,10 +49,24 @@ export default {
          * @param  {Number} project_id
          * @return {void}
          */
-        fetch_project_files (project_id) {
-            this.$http.get(`/api/projects/${project_id}/files`)
+        fetch_project (project_id) {
+            const supported_extensions = ['php', 'blade.php', 'css', 'html', 'js'];
+
+            this.$http.get(`/api/projects/${project_id}`)
                 .then(({ data }) => {
-                    this.files = typeof data == 'string' ? JSON.parse(data) : data;
+                    let project = typeof data == 'string' ? JSON.parse(data) : data;
+
+                    for (var i = 0; i < project.files.length; i++) {
+                        let file = project.files[i];
+
+                        file.icon = 'octicon-' + file.extension.replace('.', '-');
+
+                        if (! supported_extensions.includes(file.extension)) {
+                            file.icon = 'icon-insert_drive_file';
+                        }
+                    }
+
+                    this.active_project = project;
                 });
 
             this.pusher.subscribe(`projects.${project_id}`, channel => {
@@ -66,16 +88,57 @@ export default {
         },
 
         /**
+         * Reset the whole application state.
+         *
+         * @return {void}
+         */
+        reset () {
+            this.search.open = false;
+        },
+
+        /**
          * Let's listen for the shortcuts here.
          *
          * @param  {Object} event
          * @return {void}
          */
         check_commands (event) {
-            if ((event.metaKey || event.ctrlKey) && event.keyCode == 83) {
+            const KEY_S     = event.keyCode ==  83;
+            const KEY_W     = event.keyCode ==  87;
+            const KEY_E     = event.keyCode ==  69;
+            const KEY_N     = event.keyCode ==  78;
+            const KEY_P     = event.keyCode ==  80;
+            const KEY_ESC   = event.keyCode == 27;
+            const KEY_SUPER = (event.metaKey || event.ctrlKey);
+
+            if (KEY_SUPER && KEY_S) {
                 event.preventDefault();
 
                 this.save_file();
+            }
+
+            if (KEY_SUPER && KEY_W) {
+                event.preventDefault();
+
+                this.$dispatch('file_close', this.current_file);
+            }
+
+            if (KEY_SUPER && KEY_E) {
+                event.preventDefault();
+
+                this.sidebar.closed = ! this.sidebar.closed;
+            }
+
+            if (KEY_SUPER && KEY_P) {
+                event.preventDefault();
+
+                this.search.open = ! this.search.open;
+            }
+
+            if (KEY_ESC) {
+                event.preventDefault();
+
+                this.reset();
             }
         },
     },
@@ -92,13 +155,9 @@ export default {
                 this.tabs.push(file);
             }
 
-            this.$editor.setOption('mode', file.language);
-
             this.pusher.unsubscribe(`files.${this.current_file.id}`);
             this.pusher.subscribe(`files.${file.id}`, channel => {
                 channel.bind('App\\Events\\FileSaved', ({ file }) => {
-                    this.current_file = file;
-
                     this.$editor.doc.setValue(file.content);
                 });
             });
@@ -110,6 +169,7 @@ export default {
                     this.current_file = file;
 
                     this.$editor.doc.setValue(file.content || '');
+                    this.$editor.setOption('mode', file.language);
                 });
         },
 

@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'octicon';
+    src: url('/fonts/file-icon-supplement.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="octicon-"], [class*=" octicon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'octicon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.octicon-opensource:before { content: "\e000" }
+.octicon-coffeescript:before { content: "\e001" }
+.octicon-coffeescript-text:before { content: "\e002" }
+.octicon-js:before { content: "\e003" }
+.octicon-html:before { content: "\e004" }
+.octicon-css:before { content: "\e005" }
+.octicon-less-text:before { content: "\e006" }
+.octicon-less-logo:before { content: "\e007" }
+.octicon-rails:before { content: "\e008" }
+.octicon-font:before { content: "\e009" }
+.octicon-php-oval:before { content: "\e010" }
+.octicon-php:before { content: "\e011" }
+.octicon-blade-php:before { content: "\e011" }
+.octicon-git:before { content: "\e012" }
+.octicon-stylus:before { content: "\e013" }
+.octicon-sass:before { content: "\e014" }
+.octicon-bower-fill:before { content: "\e015" }
+.octicon-bower:before { content: "\e016" }
+.octicon-clojure:before { content: "\e017" }
+.octicon-javascript-letters:before { content: "\e018" }
+.octicon-travis:before { content: "\e019" }
+.octicon-photoshop:before { content: "\e020" }
+.octicon-yeoman:before { content: "\e021" }
+.octicon-wordpress:before { content: "\e022" }
+.octicon-swift:before { content: "\e023" }
+.octicon-nodejs:before { content: "\e024" }
+.octicon-npm:before { content: "\e025" }
+.octicon-scala:before { content: "\e026" }
+.octicon-java:before { content: "\e027" }
+.octicon-python:before { content: "\e028" }
+.octicon-gulp:before { content: "\e029" }
+.octicon-haskell:before { content: "\e030" }
+.octicon-heroku:before { content: "\e031" }
+.octicon-ruby:before { content: "\e032" }
+.octicon-illustrator:before { content: "\e033" }
+.octicon-grunt:before { content: "\e034" }
+.octicon-handlebars:before { content: "\e035" }
+.octicon-node:before { content: "\e036" }
+.octicon-docker:before { content: "\e037" }
+.octicon-cpp:before { content: "\e038" }
+.octicon-haml-logo:before { content: "\e039" }
+.octicon-haml-text-logo:before { content: "\e040" }
+.octicon-c:before { content: "\e041" }
+.octicon-csharp:before { content: "\e042" }
+.octicon-truetype:before { content: "\e043" }
+.octicon-atom:before { content: "\e044" }
+.octicon-menu:before { content: "\e045" }
+.octicon-go:before { content: "\e046" }
+.octicon-go-fill:before { content: "\e047" }
+.octicon-go-fill-half:before { content: "\e048" }
