@@ -6,6 +6,7 @@ Homestead.json
 .env
 .vagrant
 composer.lock
+npm-debug.log
 
 /app/Gulp/bower_components
 /app/Gulp/node_modules

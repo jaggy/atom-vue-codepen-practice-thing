@@ -1,0 +1,46 @@
+$breakpoints: (
+    mobile:  30rem,
+    tablet:  48rem,
+    desktop: 64rem,
+    retina:  75rem
+);
+
+$fonts: (
+    headline:   unquote("'Roboto', sans-serif"),
+    functional: unquote("'Roboto', sans-serif"),
+    body:       unquote("'Roboto', sans-serif"),
+    code:       unquote("Inconsolata, 'Fira Code', monospace")
+);
+
+$primary:  #8cd4f5;
+$complete: #48b0f7;
+$success:  #10cfbd;
+$danger:   #f55753;
+$warning:  #e4ba2b;
+$neutral:  white;
+
+$base16-dark-yellow:       #e4ba2b;
+$base16-dark-nebula:       #cedbd9;
+$base16-dark-white:        #ffffff;
+$base16-dark-teal:         #009788;
+
+$base16-dark-background:   #1d1f21;
+$base16-dark-primary:      $base16-dark-teal;
+$base16-dark-font-color:   #a4a6a5;
+
+$theme-primary: $base16-dark-primary;
+$font-color:    $base16-dark-font-color;
+$border-color:  grey;
+
+$editor-background:                    $base16-dark-background;
+$tree-view-background:                 $editor-background;
+$tree-view-active-file-font-color:     $base16-dark-white;
+$tree-view-active-file-background:     $base16-dark-primary;
+
+$tab-bar-background:        $base16-dark-primary;
+$tab-bar-font-color:        $base16-dark-nebula;
+
+$sidebar-font-size:         0.8rem;
+$sidebar-header-background: $base16-dark-primary;
+$sidebar-header-font-color: $base16-dark-nebula;
+$sidebar-font-color:        $base16-dark-font-color;

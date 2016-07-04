@@ -1,0 +1,43 @@
+.a-bxsh\:l { /* box-shadow light */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.a-bdb\:1s {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.a-bdt\:1s {
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.a-bd\:1s {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.a-bdlr\:1s {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+.a-bd\:n {
+    // border: 1px solid $border-color;
+}
+
+@media (min-width: breakpoint(mobile)) {
+    .a-fxb\:50\.00p\@m { flex-basis: 50%; }
+    .a-fxb\:33\.33p\@m { flex-basis: 33.33%; }
+    .a-fxb\:66\.67p\@m { flex-basis: 66.67%; }
+    .a-fxb\:100\.0p\@m { flex-basis: 100%; }
+}
+
+@media (min-width: breakpoint(tablet)) {
+    .a-fxb\:50\.00p\@l { flex-basis: 50%; }
+    .a-fxb\:33\.33p\@l { flex-basis: 33.33%; }
+    .a-fxb\:66\.67p\@l { flex-basis: 66.67%; }
+    .a-fxb\:100\.0p\@l { flex-basis: 100%; }
+}

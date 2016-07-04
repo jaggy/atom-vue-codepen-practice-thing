@@ -14,10 +14,12 @@ class CreateProjectTeamTable extends Migration
     {
         Schema::create('project_team', function (Blueprint $table) {
             $table->integer('team_id')->unsigned();
-            $table->integer('project_id')->unsigned();
-            $table->primary(array('team_id', 'project_id'));
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+
+            $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+
+            $table->primary(array('team_id', 'project_id'));
         });
     }
 

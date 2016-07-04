@@ -1,0 +1,58 @@
+.button {
+    background:      grey;
+    border:          none;
+    border-radius:   2px;
+    color:           white;
+    font-size:       .875rem;
+    min-width:       7.5rem;
+    outline:         none;
+    padding:         0.5rem 1rem;
+    text-align:      center;
+    text-decoration: none;
+    transition:      0.1s background-color ease-in-out;
+}
+
+a.button {
+    display: inline-block;
+}
+
+$button-colors: (
+    primary:  $primary,
+    danger:   $danger,
+    warning:  $warning,
+    success:  $success,
+    complete: $complete
+);
+
+.button--primary,
+.button--danger,
+.button--warning,
+.button--success,
+.button--complete {
+    color:  white;
+    border: none;
+}
+
+.button--neutral {
+    &:hover {
+        background-color: darken(grey, 5%);
+    }
+
+    &:active {
+        background-color: darken(grey, 10%);
+    }
+}
+
+@each $modifier, $color in $button-colors {
+    .button--#{$modifier} {
+        background-color: $color;
+
+        &:hover {
+            background-color: lighten($color, 5%);
+        }
+
+        &:active {
+            background-color: darken($color, 5%);
+        }
+    }
+}

@@ -1,0 +1,7 @@
+@function breakpoint($breakpoint) {
+    @return map-get($breakpoints, $breakpoint);
+}
+
+@function font($font) {
+    @return map-get($fonts, $font);
+}
