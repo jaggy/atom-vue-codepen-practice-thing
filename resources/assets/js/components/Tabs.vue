@@ -38,7 +38,7 @@ export default {
             <a href="#"
                class="tab__item [ u-d:b u-w:12r u-pl:0.75r u-pr:0.75r u-c:$tab-bar-font-color u-td:n ]"
                @click.prevent="select(file)">
-               @{ file.name }
+               @{ file.basename }
            </a>
 
            <a href="#"
