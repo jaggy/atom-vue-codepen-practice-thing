@@ -99,17 +99,23 @@ export default {
         /**
          * Let's listen for the shortcuts here.
          *
+         * @todo   Extract out to a mapping rather than hardcoded values.
+         *
          * @param  {Object} event
          * @return {void}
          */
         check_commands (event) {
-            const KEY_S     = event.keyCode ==  83;
-            const KEY_W     = event.keyCode ==  87;
-            const KEY_E     = event.keyCode ==  69;
-            const KEY_N     = event.keyCode ==  78;
-            const KEY_P     = event.keyCode ==  80;
+            const KEY_S     = event.keyCode == 83;
+            const KEY_W     = event.keyCode == 87;
+            const KEY_E     = event.keyCode == 69;
+            const KEY_N     = event.keyCode == 78;
+            const KEY_P     = event.keyCode == 80;
             const KEY_ESC   = event.keyCode == 27;
             const KEY_SUPER = (event.metaKey || event.ctrlKey);
+
+            const KEY_0     = event.keyCode == 48;
+            const KEY_DASH  = event.keyCode == 189;
+            const KEY_EQUAL = event.keyCode == 187;
 
             if (KEY_SUPER && KEY_S) {
                 event.preventDefault();
@@ -133,6 +139,32 @@ export default {
                 event.preventDefault();
 
                 this.search.open = ! this.search.open;
+            }
+
+            if (KEY_SUPER && KEY_DASH) {
+                event.preventDefault();
+
+                let editor    = document.querySelector('.CodeMirror');
+                let font_size = window.getComputedStyle(editor).fontSize.replace('px', '');
+
+                editor.style.fontSize = parseInt(font_size) - 1 + 'px';
+            }
+
+            if (KEY_SUPER && KEY_EQUAL) {
+                event.preventDefault();
+
+                let editor    = document.querySelector('.CodeMirror');
+                let font_size = window.getComputedStyle(editor).fontSize.replace('px', '');
+
+                editor.style.fontSize = parseInt(font_size) + 1 + 'px';
+            }
+
+            if (KEY_SUPER && KEY_0) {
+                event.preventDefault();
+
+                let editor = document.querySelector('.CodeMirror');
+
+                editor.style.fontSize = '1rem';
             }
 
             if (KEY_ESC) {
