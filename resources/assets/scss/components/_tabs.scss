@@ -24,3 +24,12 @@
 .tab__highlight--active {
     width: 100%;
 }
+
+.tab__close {
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transform:  scale(0);
+}
+
+.tab-bar__tab:hover > .tab__close {
+    transform: scale(1);
+}
