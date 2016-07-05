@@ -57,7 +57,19 @@ export default {
 
             this.visible = false;
         },
-    }
+    },
+
+    watch: {
+        visible (visible) {
+            if (! visible) {
+                this.query = null;
+
+                return;
+            }
+
+            this.$els.query.focus();
+        }
+    },
 }
 </script>
 
