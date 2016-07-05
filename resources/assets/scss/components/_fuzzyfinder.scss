@@ -1,7 +1,16 @@
 .fuzzy-finder__input {
     background:    none;
-    border-bottom: 2px solid $theme-primary;
-    color:         $font-color;
+    color:       $font-color;
+    display:     block;
+}
+
+.fuzzy-finder__highlight {
+    background: $theme-primary;
+    transition: 1s width ease-in-out;
+}
+
+.fuzzy-finder--active .fuzzy-finder__highlight {
+    width: 100%;
 }
 
 .fuzzy-finder__file--active {
